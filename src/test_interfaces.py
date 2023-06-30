@@ -2,8 +2,8 @@
 Each test should utilise aspects of your code to complete the specified task.
 These functions will be called by tests in the test suite to ensure you code is working properly.
 '''
-import Activity1A
 
+import numpy as np
 
 def task_0_always_return_0():
     '''This function should always return the value zero'''
@@ -24,8 +24,26 @@ def task_1a_simple_decay_chain_populations(output_times: list, initial_number_of
     :param decay_rate: The decay rate of the decaying isomer in units of 1/s.
     :returns: Should return two sequences (e.g. lists, Tuples, 1D Numpy arrays) of length n where n is the number of output times. The first sequence contains the populations of Isomer 1 as a function of time, the second contains he populations of Isomer 1 as a function of time. Ine ach sequence, the value with index [0] in each array is the population the isomer at t=0 and the value with index [n] is the number of moles of the isomer at the end of the simulation.
     '''
+    def calulate_decay(initial_pop, decay_rate, time):
+        # calculates the final populations of the two isotopes
+        # for a given time float value
+        final_pop = np.zeros(np.size(initial_pop),dtype=float)
+        for ii in range(np.size(initial_pop)):
+            if ii == 0:
+                final_pop[ii] = initial_pop[ii] * np.exp(-decay_rate[ii] * time)
+            else:
+                final_pop[ii] = initial_pop[ii] * np.exp(-decay_rate[ii] * time) + (initial_pop[ii-1] - final_pop[ii-1])
+    
+        return final_pop
+    
+    # return a list of final populations for each isotope for a list of times using the calculate_decay function
+    def calculate_decay_list(initial_pop, decay_rate, time, final_pop_list):
+        
+        for ii in range(np.size(time)):
+            final_pop_list[:,ii] = calulate_decay(initial_pop, decay_rate, time[ii])
+        return final_pop_list
 
-    output = Activity1A.calulate_decay(initial_number_of_moles,decay_rate,output_times)
+    output = calculate_decay_list(initial_number_of_moles,decay_rate,output_times)
 
     return output[0], output[1]
 
