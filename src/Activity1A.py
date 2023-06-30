@@ -13,8 +13,8 @@ def calulate_decay(initial_pop, decay_rate, time):
         return final_pop
     
 # return a list of final populations for each isotope for a list of times using the calculate_decay function
-def calculate_decay_list(initial_pop, decay_rate, time, final_pop_list):
-    
+def calculate_decay_list(initial_pop, decay_rate, time):
+    final_pop_list = np.zeros((np.size(initial_pop),np.size(time)),dtype=float)
     for ii in range(np.size(time)):
         final_pop_list[:,ii] = calulate_decay(initial_pop, decay_rate, time[ii])
     return final_pop_list
@@ -67,7 +67,7 @@ decay_rate = np.array([5,0],dtype=float)
 time = np.array([0,0.5,1,2,3,4],dtype=float)
 final_pop_list = np.zeros((np.size(initial_pop),np.size(time)),dtype=float)
 
-final_pop_list[:,:] = calculate_decay_list(initial_pop, decay_rate, time, final_pop_list)
+final_pop_list[:,:] = calculate_decay_list(initial_pop, decay_rate, time)
     
 
 for ii in range(np.size(time)):
