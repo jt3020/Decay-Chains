@@ -1,7 +1,8 @@
 
 import re
-
+import os
 from string import ascii_lowercase
+data_path = "decay_data"
 
 def extract_decay_mode_info(line):
     pattern = r"Decay Mode:([^:]+)"
@@ -46,17 +47,19 @@ def parse_string(list_of_strings):
 
 def get_half_life(endf_file):
     """use regex to find the half life number in seconds"""
-    with open(endf_file, 'r') as f:
+    with open(os.path.join(data_path, endf_file), 'r') as f:
         for line in f:
             if 'Parent half-life' in line:
+                if "stable" in line.lower():
+                    return 0
                 return float(re.findall(r'\d+\.\d+', line)[0])
     return None
 
 def get_decay_mode(path):
     """a function that extracts the decay mode and percentage from a line in the endf file, take into
     account multiple decay modes and percentages, return them in a dictionary"""
-    
-    with open(path, 'r') as f:
+
+    with open(os.path.join(data_path, path), 'r') as f:
         for line in f:
             if 'Decay Mode' in line:
                 decay_dict = parse_string(extract_decay_mode_info(line).split()[:-3])
@@ -72,7 +75,7 @@ def get_atomic_symbol(file_path):
 def get_info(filename):
     atomic_number = int(filename[4:7])
     atomic_symbol = str(filename[8:10])
-    atomic_mass = int(filename[11:14])
+    atomic_mass = int(filename[11:13])
     if filename[14] == "m":
         energy_state = int(filename[15])
     else:

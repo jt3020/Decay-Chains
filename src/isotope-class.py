@@ -1,5 +1,4 @@
 # write a class for the isotope object containing, half life, decay mode, decay rate, and isomer name
-
 from endfReader import get_half_life, get_decay_mode, get_atomic_symbol, get_info
 
 class Isotope:
@@ -15,9 +14,10 @@ class Isotope:
     decays_from = []
     is_stable = False
     
-    def __init__(self, isomer_name, file_name=None)
+    def __init__(self, isomer_name=None, file_name=None):
         self.original_isomer_name = isomer_name
-        self.isomer_name = isomer_name
+        if isomer_name is not None:
+            self.isomer_name = isomer_name
         self.atomic_number = 0
         self.atomic_mass = 0
         self.energy_state_number = 0
@@ -29,7 +29,8 @@ class Isotope:
             self.init_from_file(file_name)
 
         # find decay chain
-        self.decays_into = self%find_child_nuclides()
+        if not self.is_stable:
+            self.decays_into = self.find_child_nuclides()
         return
 
     # make a function that converts atomic symbol to atomic number
@@ -43,13 +44,16 @@ class Isotope:
         self.atomic_mass = output[2]
         self.energy_state_number = output[3]
         
-        self.decay_mode = get_decay_mode(file_name)
+        self.decay_mode = get_decay_mode(file_name) # dictioary 
+        if self.decay_mode is None:
+            self.is_stable = True
+
         self.half_life = get_half_life(file_name)
         return 
 
     def find_child_nuclides(self):
         """finds the child nuclides of a given isotope"""
-        for decay_mode in self.decay_mode:
+        for decay_mode in self.decay_mode.keys():
             if 'B-' in decay_mode:
                 self.decays_into.append(number_to_symbol(self%atomic_number + 1) + str(self%atomic_mass))
             elif ("B+" or "EC") in decay_mode:
@@ -62,4 +66,8 @@ def number_to_symbol(atomic_number):
     # periodic_table_dict is a global array thing 
     key = list(periodic_table_dict.keys())[list(periodic_table_dict.values()).index(atomic_number)]
     return key 
+    
+
+if __name__ == "__main__":
+    test_isotope = Isotope(file_name="dec-001_H_001.endf")
     
