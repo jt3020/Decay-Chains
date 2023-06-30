@@ -29,5 +29,3 @@ def decay_chain(initial_population, decay_rates, times):
         final_populations.append(final_pops)
     # return the final populations list
     return final_populations
-
-print(decay_chain([2, 0], [5, 0], [0,0.5,1]))
