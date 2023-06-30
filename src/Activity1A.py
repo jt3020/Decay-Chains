@@ -1,32 +1,33 @@
 import numpy as np
 
-#write a forward Euler solver for the decay chain
-def forward_euler_solver(decay_rates, initial_population, stoptime):
-    '''
-    This function should accept the decay rates of the isomers in a decay chain, the initial population of the first isomer, and the times at which the populations of the isomers should be calculated. It should return the populations of the isomers at the output times.
-    :param decay_rates: dict[str, float] whose keys are the names of the isomers, and whose values are the decay rates of those isomers
-    :param initial_population: float The number of moles of the initial isomer present
-    :param output_times: list[float] The times at which the populations of isomers should be calculated. The first value will always be 0.
-    :returns: Should be a dict whose keys are the names of the isomers, and whose values are sequences (lists, tuple, numpy arrays, etc) holding the populations of those isomers at the output times
-    '''
-
-    #create a dictionary to store the populations of the isomers at the output times
-    populations = []
-    output_times = np.arrange(0, stoptime, 1000)
-    #loop over the output times
-    for time in output_times:
-        #calculate the populations of the isomers at the current time
-        #and store them in the populations dictionary
-        newpop = 
-        populations[time] = None
-    #return the populations dictionary
-    return populations
-    pass
-
 ## initial populations of isotopes
 ## isotope names - luis' class code
 ## for two isotopes calculate the population
 ## want a time value
 
 # function that takes the intial population of two isotopes, their respective decay rates and the time, printing their final populations to terminal
+def decay_chain(initial_population, decay_rates, times):
+    # initial population is a list of the initial populations of the isotopes
+    # decay rates is a list of the decay rates of the isotopes
+    # time is the time at which we want to calculate the final populations of the isotopes
+    # final populations is a list of the final populations of the isotopes
+    # final populations is a list of the final populations of the isotopes
+    final_populations = []
+    # loop over the initial populations
+    for time in times:
+        final_pops = []
+        for i in range(len(initial_population)):
+            # calculate the final population of the isotope
+            final_population = initial_population[i] * np.exp(-decay_rates[i] * time)
 
+            # amend the final populations list so isotope 1 decays to isotope 2
+            if i == 1:
+                final_population = initial_population[i] - final_population + initial_population[i-1]*(1-np.exp(-decay_rates[i-1] * time))
+            # append the final population to the final populations list
+
+            final_pops.append(final_population)
+        final_populations.append(final_pops)
+    # return the final populations list
+    return final_populations
+
+print(decay_chain([2, 0], [5, 0], [0,0.5,1]))
