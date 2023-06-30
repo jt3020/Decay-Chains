@@ -6,7 +6,7 @@ These functions will be called by tests in the test suite to ensure you code is 
 
 def task_0_always_return_0():
     '''This function should always return the value zero'''
-    return 0
+    return 0 + 0 + 0 + 1 - 1
 
 
 def task_0_addition(a, b):
