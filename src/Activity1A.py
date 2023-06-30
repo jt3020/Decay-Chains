@@ -30,16 +30,6 @@ as a 2D array of final populations of dimensions[isotope, time]
 
 """
 
-initial_pop = np.array([2,0],dtype=float)
-decay_rate = np.array([5,0],dtype=float)
-time = np.array([0,0.5,1,2,3,4],dtype=float)
-final_pop_list = np.zeros((np.size(initial_pop),np.size(time)),dtype=float)
-
-final_pop_list[:,:] = calculate_decay_list(initial_pop, decay_rate, time, final_pop_list)
-    
-
-for ii in range(np.size(time)):
-    print(f'At time {time[ii]} the final populations are {final_pop_list[:,ii]}')
 
 ## initial populations of isotopes
 ## isotope names - luis' class code
@@ -70,3 +60,16 @@ def decay_chain(initial_population, decay_rates, times):
         final_populations.append(final_pops)
     # return the final populations list
     return final_populations
+
+
+initial_pop = np.array([2,0],dtype=float)
+decay_rate = np.array([5,0],dtype=float)
+time = np.array([0,0.5,1,2,3,4],dtype=float)
+final_pop_list = np.zeros((np.size(initial_pop),np.size(time)),dtype=float)
+
+final_pop_list[:,:] = calculate_decay_list(initial_pop, decay_rate, time, final_pop_list)
+    
+
+for ii in range(np.size(time)):
+    print(f'At time {time[ii]} the final populations are {final_pop_list[:,ii]}')
+
