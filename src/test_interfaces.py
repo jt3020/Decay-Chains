@@ -6,6 +6,7 @@ These functions will be called by tests in the test suite to ensure you code is 
 import numpy as np
 import src.Activity1C as a1c
 import src.Activity1A as a1a
+import src.Activity2A as a2a
 
 def task_0_always_return_0():
     '''This function should always return the value zero'''
