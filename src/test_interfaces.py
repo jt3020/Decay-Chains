@@ -37,13 +37,13 @@ def task_1a_simple_decay_chain_populations(output_times: list, initial_number_of
         return final_pop
     
     # return a list of final populations for each isotope for a list of times using the calculate_decay function
-    def calculate_decay_list(initial_pop, decay_rate, time, final_pop_list):
-        
+    def calculate_decay_list(initial_pop, decay_rate, time):
+        final_pop_list = np.zeros((np.size(initial_pop),np.size(time)),dtype=float)
         for ii in range(np.size(time)):
             final_pop_list[:,ii] = calulate_decay(initial_pop, decay_rate, time[ii])
         return final_pop_list
 
-    output = calculate_decay_list(initial_number_of_moles,decay_rate,output_times)
+    output = calculate_decay_list([initial_number_of_moles,0],[decay_rate,0],output_times)
 
     return output[0], output[1]
 
