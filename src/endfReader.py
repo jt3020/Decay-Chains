@@ -25,10 +25,19 @@ def get_atomic_symbol(file_path):
     file_name = file_path.split('/')[-1]
     return file_name.split('_')[1]  
 
+def get_info(filename):
+    atomic_number = int(filename[4:7])
+    atomic_symbol = str(filename[8:10])
+    atomic_mass = int(filename[11:14])
+    if filename[14] == "m":
+        energy_state = int(filename[15])
+    else:
+        energy_state = 0
+    return [atomic_number, atomic_symbol, atomic_mass, energy_state]
+
 print(get_decay_mode('decay_data/dec-000_Nn_001.endf'))
 print(get_half_life('decay_data/dec-000_Nn_001.endf'))
 print(get_atomic_symbol('decay_data/dec-000_Nn_001.endf'))
-
 
 # import os 
 # print(os.listdir('decay_data/'))
