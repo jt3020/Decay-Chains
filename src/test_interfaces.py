@@ -6,12 +6,12 @@ These functions will be called by tests in the test suite to ensure you code is 
 
 def task_0_always_return_0():
     '''This function should always return the value zero'''
-    pass
+    return 0
 
 
 def task_0_addition(a, b):
     '''This function should return the sum of the parameters a and b'''
-    pass
+    return a + b
 
 
 def task_1a_simple_decay_chain_populations(output_times: list, initial_number_of_moles: float, decay_rate: float):
