@@ -3,6 +3,7 @@ Each test should utilise aspects of your code to complete the specified task.
 These functions will be called by tests in the test suite to ensure you code is working properly.
 '''
 
+import numpy as np
 
 def task_0_always_return_0():
     '''This function should always return the value zero'''
@@ -23,7 +24,28 @@ def task_1a_simple_decay_chain_populations(output_times: list, initial_number_of
     :param decay_rate: The decay rate of the decaying isomer in units of 1/s.
     :returns: Should return two sequences (e.g. lists, Tuples, 1D Numpy arrays) of length n where n is the number of output times. The first sequence contains the populations of Isomer 1 as a function of time, the second contains he populations of Isomer 1 as a function of time. Ine ach sequence, the value with index [0] in each array is the population the isomer at t=0 and the value with index [n] is the number of moles of the isomer at the end of the simulation.
     '''
-    pass
+    def calulate_decay(initial_pop, decay_rate, time):
+        # calculates the final populations of the two isotopes
+        # for a given time float value
+        final_pop = np.zeros(np.size(initial_pop),dtype=float)
+        for ii in range(np.size(initial_pop)):
+            if ii == 0:
+                final_pop[ii] = initial_pop[ii] * np.exp(-decay_rate[ii] * time)
+            else:
+                final_pop[ii] = initial_pop[ii] * np.exp(-decay_rate[ii] * time) + (initial_pop[ii-1] - final_pop[ii-1])
+    
+        return final_pop
+    
+    # return a list of final populations for each isotope for a list of times using the calculate_decay function
+    def calculate_decay_list(initial_pop, decay_rate, time):
+        final_pop_list = np.zeros((np.size(initial_pop),np.size(time)),dtype=float)
+        for ii in range(np.size(time)):
+            final_pop_list[:,ii] = calulate_decay(initial_pop, decay_rate, time[ii])
+        return final_pop_list
+
+    output = calculate_decay_list([initial_number_of_moles,0],[decay_rate,0],output_times)
+
+    return output[0], output[1]
 
 
 def task_1b_decay_data_from_filename(filepath: str):
@@ -46,6 +68,8 @@ def task_1c_endf_filename_from_nuclear_data(atomic_number: int, atomic_mass: int
     :param energy state: int providing the energy_state_number
     :returns: Should be a string containing the endf filename  corresponding to the nuclear data (without any preceding path), e.g. dec-006_C_016
     '''
+
+    
     pass
 
 
