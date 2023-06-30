@@ -90,4 +90,5 @@ def task_2a_isomer_chain_from_initial_population(initial_isomer_name: str, initi
     :param output_times: list[float] The times at which the populations of isomers should be calculated. The first value will always be 0.
     :returns: Should be a dict whose keys are the names of the daughter isomers, and whose values are sequences (lists, tuple, numpy arrays, etc) holding the populations of those isomers at the output times
     '''
+    
     pass
