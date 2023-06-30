@@ -17,13 +17,18 @@ def get_decay_mode(endf_file):
             if 'Decay Mode' in line:
                 return re.findall(r'\w+-', line)[0]
     return None
+
 #write a function that splits the file name into proton number and atomic symbol and the mass number
 
 def get_atomic_symbol(file_path):
     """a function that splits the file name into proton number and atomic symbol and the mass number"""
     file_name = file_path.split('/')[-1]
-    return file_name.split('_')[1]    
+    return file_name.split('_')[1]  
 
 print(get_decay_mode('decay_data/dec-000_Nn_001.endf'))
 print(get_half_life('decay_data/dec-000_Nn_001.endf'))
 print(get_atomic_symbol('decay_data/dec-000_Nn_001.endf'))
+
+
+# import os 
+# print(os.listdir('decay_data/'))
