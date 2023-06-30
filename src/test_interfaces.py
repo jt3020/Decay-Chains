@@ -25,7 +25,7 @@ def task_1a_simple_decay_chain_populations(output_times: list, initial_number_of
     :returns: Should return two sequences (e.g. lists, Tuples, 1D Numpy arrays) of length n where n is the number of output times. The first sequence contains the populations of Isomer 1 as a function of time, the second contains he populations of Isomer 1 as a function of time. Ine ach sequence, the value with index [0] in each array is the population the isomer at t=0 and the value with index [n] is the number of moles of the isomer at the end of the simulation.
     '''
 
-    output = Activity1A.decay_chain(initial_number_of_moles,decay_rate,output_times)
+    output = Activity1A.calulate_decay(initial_number_of_moles,decay_rate,output_times)
 
     return output[0], output[1]
 
