@@ -2,6 +2,7 @@
 Each test should utilise aspects of your code to complete the specified task.
 These functions will be called by tests in the test suite to ensure you code is working properly.
 '''
+import Activity1A
 
 
 def task_0_always_return_0():
@@ -23,18 +24,10 @@ def task_1a_simple_decay_chain_populations(output_times: list, initial_number_of
     :param decay_rate: The decay rate of the decaying isomer in units of 1/s.
     :returns: Should return two sequences (e.g. lists, Tuples, 1D Numpy arrays) of length n where n is the number of output times. The first sequence contains the populations of Isomer 1 as a function of time, the second contains he populations of Isomer 1 as a function of time. Ine ach sequence, the value with index [0] in each array is the population the isomer at t=0 and the value with index [n] is the number of moles of the isomer at the end of the simulation.
     '''
-    from Activity1A import decay_chain
 
-    output = decay_chain(initial_number_of_moles,decay_rate,output_times)
+    output = Activity1A.decay_chain(initial_number_of_moles,decay_rate,output_times)
 
-    trueoutput1 = []
-    trueoutput2 = []
-
-    for out in output:
-        trueoutput1.append(out[0])
-        trueoutput2.append(out[1])
-
-    return trueoutput1, trueoutput2
+    return output[0], output[1]
 
 
 def task_1b_decay_data_from_filename(filepath: str):
