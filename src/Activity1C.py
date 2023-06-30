@@ -47,7 +47,3 @@ def isomer_name_to_nuclear_data(isomer_name: str):
         energy_state = 0
 
     return atomic_number, atomic_mass, energy_state
-
-print(nuclear_data_to_filename(atomic_number=6, atomic_mass=13,energy_state=1))
-print(nuclear_data_to_isomer_name(atomic_number=6, atomic_mass=13,energy_state=1))
-print(isomer_name_to_nuclear_data("Cu70m2"))
